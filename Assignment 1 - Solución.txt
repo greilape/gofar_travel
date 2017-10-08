@@ -1,0 +1,48 @@
+/* 
+   Assignment 1
+   Autores: Greisy Dariana Largo Pescador - Yesid Hernández Hoyos
+   Asignatura: Administración de bases de datos
+   Docente: Andrés Martínez Gutierrez
+*/
+
+/*
+ 2. Create 3 Tablespaces (0.2) :
+  a. first one with 1 Gb and 3 datafiles, tablespace should be named "gofar_travel"
+  b. second one with 500 Mb and 1 datafile, named "test_purposes".
+  c. Undo tablespace with 5Mb of space and 1 datafile
+*/
+
+-- a. first one with 1 Gb and 3 datafiles, tablespace should be named "gofar_travel"
+CREATE TABLESPACE gofar_travel DATAFILE
+'D:/app/us/virtual/oradata/orcl/gofar_travel01.dbf' size 350M, 
+'D:/app/us/virtual/oradata/orcl/gofar_travel02.dbf' size 350M,
+'D:/app/us/virtual/oradata/orcl/gofar_travel03.dbf' size 324M;
+
+-- b. second one with 500 Mb and 1 datafile, named "test_purposes".
+CREATE TABLESPACE test_purposes DATAFILE
+'D:/app/us/virtual/oradata/orcl/test_purposes01.dbf' size 500M;
+
+-- c. Undo tablespace with 5Mb of space and 1 datafile
+CREATE UNDO TABLESPACE undo_tablespace DATAFILE
+'D:/app/us/virtual/oradata/orcl/undo_tablespace01.dbf' size 5M; 
+
+/* 3. Set the undo tablespace to be used in the system (0.2) */
+ALTER SYSTEM SET UNDO_TABLESPACE = undo_tablespace;
+
+/* 4. Create a DBA user and assign it to the tablespace called "gofar_travel", this user has unlimited space
+on the tablespace (0.2) */
+
+-- En mi caso, siempre debo ejecutar el siguiente comando para poder crear usuarios
+alter session set "_ORACLE_SCRIPT"=true;
+
+-- Ahora si procedo a crear el usuario solicitado
+CREATE USER USUARIO_DBA IDENTIFIED BY USUARIO_DBA DEFAULT TABLESPACE gofar_travel
+QUOTA UNLIMITED ON gofar_travel;
+
+-- Convertir a USUARIO_DBA en DBA
+GRANT DBA TO USUARIO_DBA;
+
+/* 5. Assign the dba role and permissions to connect to the user just created (0.2) */
+
+-- Con la solución del punto 4, ya queda resuelta la necesidad expuesta en este punto (5). Por tal motivo no se realiza nada.
+
