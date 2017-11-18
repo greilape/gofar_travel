@@ -1,0 +1,103 @@
+Plan hash value: 1829956681
+ 
+------------------------------------------------------------------------------------------------------
+| Id  | Operation                          | Name            | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                   |                 |     1 |   913 |     7   (0)| 00:00:01 |
+|   1 |  NESTED LOOPS OUTER                |                 |     1 |   913 |     7   (0)| 00:00:01 |
+|*  2 |   HASH JOIN OUTER                  |                 |     1 |   897 |     6   (0)| 00:00:01 |
+|   3 |    NESTED LOOPS                    |                 |     1 |   891 |     3   (0)| 00:00:01 |
+|   4 |     NESTED LOOPS                   |                 |     1 |   891 |     3   (0)| 00:00:01 |
+|   5 |      NESTED LOOPS                  |                 |     1 |   620 |     3   (0)| 00:00:01 |
+|   6 |       NESTED LOOPS                 |                 |     1 |   478 |     3   (0)| 00:00:01 |
+|   7 |        NESTED LOOPS                |                 |     1 |   323 |     3   (0)| 00:00:01 |
+|   8 |         TABLE ACCESS FULL          | FACTURAS        |     1 |    52 |     3   (0)| 00:00:01 |
+|   9 |         TABLE ACCESS BY INDEX ROWID| CLIENTES        |     1 |   271 |     0   (0)| 00:00:01 |
+|* 10 |          INDEX UNIQUE SCAN         | SYS_C008100     |     1 |       |     0   (0)| 00:00:01 |
+|  11 |        TABLE ACCESS BY INDEX ROWID | VEHICULOS       |     1 |   155 |     0   (0)| 00:00:01 |
+|* 12 |         INDEX UNIQUE SCAN          | SYS_C008108     |     1 |       |     0   (0)| 00:00:01 |
+|  13 |       TABLE ACCESS BY INDEX ROWID  | FABRICANTES     |     1 |   142 |     0   (0)| 00:00:01 |
+|* 14 |        INDEX UNIQUE SCAN           | SYS_C008104     |     1 |       |     0   (0)| 00:00:01 |
+|* 15 |      INDEX UNIQUE SCAN             | SYS_C008102     |     1 |       |     0   (0)| 00:00:01 |
+|  16 |     TABLE ACCESS BY INDEX ROWID    | VENDEDORES      |     1 |   271 |     0   (0)| 00:00:01 |
+|  17 |    TABLE ACCESS FULL               | FACTURA_DETALLE |    31 |   186 |     3   (0)| 00:00:01 |
+|  18 |   TABLE ACCESS BY INDEX ROWID      | ACCESORIOS      |     1 |    16 |     1   (0)| 00:00:01 |
+|* 19 |    INDEX UNIQUE SCAN               | SYS_C008106     |     1 |       |     0   (0)| 00:00:01 |
+------------------------------------------------------------------------------------------------------
+ 
+Query Block Name / Object Alias (identified by operation id):
+-------------------------------------------------------------
+ 
+   1 - SEL$FA6F74A3
+   8 - SEL$FA6F74A3 / F@SEL$2
+   9 - SEL$FA6F74A3 / C@SEL$7
+  10 - SEL$FA6F74A3 / C@SEL$7
+  11 - SEL$FA6F74A3 / VEH@SEL$5
+  12 - SEL$FA6F74A3 / VEH@SEL$5
+  13 - SEL$FA6F74A3 / FAB@SEL$6
+  14 - SEL$FA6F74A3 / FAB@SEL$6
+  15 - SEL$FA6F74A3 / V@SEL$4
+  16 - SEL$FA6F74A3 / V@SEL$4
+  17 - SEL$FA6F74A3 / FD@SEL$2
+  18 - SEL$FA6F74A3 / A@SEL$3
+  19 - SEL$FA6F74A3 / A@SEL$3
+ 
+Predicate Information (identified by operation id):
+---------------------------------------------------
+ 
+   2 - access("F"."ID"="FD"."ID_FACTURA"(+))
+  10 - access("F"."ID_CLIENTE"="C"."ID")
+  12 - access("F"."ID_VEHICULO"="VEH"."ID")
+  14 - access("VEH"."ID_FABRICANTE"="FAB"."ID")
+  15 - access("F"."ID_VENDEDOR"="V"."ID")
+  19 - access("FD"."ID_ACCESORIO"="A"."ID"(+))
+ 
+Column Projection Information (identified by operation id):
+-----------------------------------------------------------
+ 
+   1 - (#keys=0) "F"."ID"[NUMBER,22], "V"."APELLIDOS"[VARCHAR2,255], 
+       "F"."ID_CLIENTE"[NUMBER,22], "F"."ID_VEHICULO"[NUMBER,22], "F"."ID_VENDEDOR"[NUMBER,22], 
+       "C"."NOMBRES"[VARCHAR2,255], "C"."APELLIDOS"[VARCHAR2,255], "VEH"."MARCA"[VARCHAR2,255], 
+       "FAB"."NOMBRE_FABRICANTE"[VARCHAR2,255], "V"."NOMBRES"[VARCHAR2,255], 
+       "FD"."ID_ACCESORIO"[NUMBER,22], "A"."ID"[NUMBER,22], "A"."DESCRIPCION"[VARCHAR2,255]
+   2 - (#keys=1) "F"."ID"[NUMBER,22], "V"."APELLIDOS"[VARCHAR2,255], 
+       "F"."ID_CLIENTE"[NUMBER,22], "F"."ID_VEHICULO"[NUMBER,22], "F"."ID_VENDEDOR"[NUMBER,22], 
+       "C"."NOMBRES"[VARCHAR2,255], "C"."APELLIDOS"[VARCHAR2,255], "VEH"."MARCA"[VARCHAR2,255], 
+       "FAB"."NOMBRE_FABRICANTE"[VARCHAR2,255], "V"."NOMBRES"[VARCHAR2,255], 
+       "FD"."ID_ACCESORIO"[NUMBER,22]
+   3 - (#keys=0) "F"."ID"[NUMBER,22], "F"."ID_CLIENTE"[NUMBER,22], 
+       "F"."ID_VEHICULO"[NUMBER,22], "F"."ID_VENDEDOR"[NUMBER,22], "C"."NOMBRES"[VARCHAR2,255], 
+       "C"."APELLIDOS"[VARCHAR2,255], "VEH"."MARCA"[VARCHAR2,255], 
+       "FAB"."NOMBRE_FABRICANTE"[VARCHAR2,255], "V"."NOMBRES"[VARCHAR2,255], 
+       "V"."APELLIDOS"[VARCHAR2,255]
+   4 - (#keys=0) "F"."ID"[NUMBER,22], "F"."ID_CLIENTE"[NUMBER,22], 
+       "F"."ID_VEHICULO"[NUMBER,22], "F"."ID_VENDEDOR"[NUMBER,22], "C"."NOMBRES"[VARCHAR2,255], 
+       "C"."APELLIDOS"[VARCHAR2,255], "VEH"."MARCA"[VARCHAR2,255], 
+       "FAB"."NOMBRE_FABRICANTE"[VARCHAR2,255], "V".ROWID[ROWID,10]
+   5 - (#keys=0) "F"."ID"[NUMBER,22], "F"."ID_CLIENTE"[NUMBER,22], 
+       "F"."ID_VEHICULO"[NUMBER,22], "F"."ID_VENDEDOR"[NUMBER,22], "C"."NOMBRES"[VARCHAR2,255], 
+       "C"."APELLIDOS"[VARCHAR2,255], "VEH"."MARCA"[VARCHAR2,255], 
+       "FAB"."NOMBRE_FABRICANTE"[VARCHAR2,255]
+   6 - (#keys=0) "F"."ID"[NUMBER,22], "F"."ID_CLIENTE"[NUMBER,22], 
+       "F"."ID_VEHICULO"[NUMBER,22], "F"."ID_VENDEDOR"[NUMBER,22], "C"."NOMBRES"[VARCHAR2,255], 
+       "C"."APELLIDOS"[VARCHAR2,255], "VEH"."MARCA"[VARCHAR2,255], "VEH"."ID_FABRICANTE"[NUMBER,22]
+   7 - (#keys=0) "F"."ID"[NUMBER,22], "F"."ID_CLIENTE"[NUMBER,22], 
+       "F"."ID_VEHICULO"[NUMBER,22], "F"."ID_VENDEDOR"[NUMBER,22], "C"."NOMBRES"[VARCHAR2,255], 
+       "C"."APELLIDOS"[VARCHAR2,255]
+   8 - "F"."ID"[NUMBER,22], "F"."ID_CLIENTE"[NUMBER,22], "F"."ID_VEHICULO"[NUMBER,22], 
+       "F"."ID_VENDEDOR"[NUMBER,22]
+   9 - "C"."NOMBRES"[VARCHAR2,255], "C"."APELLIDOS"[VARCHAR2,255]
+  10 - "C".ROWID[ROWID,10]
+  11 - "VEH"."MARCA"[VARCHAR2,255], "VEH"."ID_FABRICANTE"[NUMBER,22]
+  12 - "VEH".ROWID[ROWID,10]
+  13 - "FAB"."NOMBRE_FABRICANTE"[VARCHAR2,255]
+  14 - "FAB".ROWID[ROWID,10]
+  15 - "V".ROWID[ROWID,10]
+  16 - "V"."NOMBRES"[VARCHAR2,255], "V"."APELLIDOS"[VARCHAR2,255]
+  17 - "FD"."ID_FACTURA"[NUMBER,22], "FD"."ID_ACCESORIO"[NUMBER,22]
+  18 - "A"."ID"[NUMBER,22], "A"."DESCRIPCION"[VARCHAR2,255]
+  19 - "A".ROWID[ROWID,10], "A"."ID"[NUMBER,22]
+ 
+Note
+-----
+   - this is an adaptive plan
