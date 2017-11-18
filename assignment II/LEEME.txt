@@ -1,0 +1,13 @@
+Noviembre 18 de 2017
+
+Autores: Greisy Dariana Largo - Yesid Hernández Hoyos
+
+
+Hola profesor. A continuación se dan unas pautas importantes para realizar una revisión de la información adjunta a esta carpeta:
+
+
+1. En la carpeta "Punto 10 - Export" se adjunta el Script generado al exportar la Base de Datos de la solución. En este Script se visualiza la solución de los puntos 1 al 6 del taller "Assignment 2".
+2. En la carpeta "Punto 9" se adjunta el ensayo realizado, relacionado a la lectura de la url "https://eng.uber.com/mysql-migration/".
+3. En la carpeta "Punto 8" se adjunta el mapa mental realizado, relacionado a la lectura de la url "https://www.toptal.com/database/database-design-bad-practices".
+4. En la carpeta "Punto 7" se adjuntan los archivos relacionados a la solución del punto 7 del taller "Assignment 2".
+5. En la carpeta "Punto Extra-No calificable" se adjunta el Script que se generó al realizar la solución de cada uno de los puntos. Este no es un item calificable pero decidimos adjuntarlo como soporte del trabajo realizado
